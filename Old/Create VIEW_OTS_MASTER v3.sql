@@ -1,7 +1,7 @@
 drop view SRAA_SAND.VIEW_OTS_MASTER;
 
 Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
-
+--Lets make some changes!!! W00t w00t
 (Select
 	a1.NUMBER_SEQ,
 	a1. Dest_PO_ID,
