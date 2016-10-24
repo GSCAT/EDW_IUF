@@ -18,9 +18,10 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 		case
 			--WHEN a1.ACTUAL_STOCKED_LCL_DATE is null then 'Unmeasurable'
 			
-			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and (((a1.Data_Pulled -1) - a1.PLANNED_STOCKED_DATE)  between 3 and 45)) then 'Late' 
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and (((a1.Data_Pulled -1) - a1.PLANNED_STOCKED_DATE)  between 4 and 45)) then 'Late' 
 			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and ((a1.Data_Pulled -1) - a1.PLANNED_STOCKED_DATE between -45 and 3)) then 'OnTime' 
-			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between 3 and 45  then 'Late'
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between -45 and 3  then 'OnTime'
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between 4 and 45  then 'Late'
 						WHEN (a1.ACTUAL_STOCKED_LCL_DATE is NULL AND ((a1.Data_Pulled -1) - a1.PLANNED_STOCKED_DATE > 45)) THEN 'Undetermined'
 			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is NULL AND ((a1.Data_Pulled -1) - a1.PLANNED_STOCKED_DATE < -(45))) THEN 'Undetermined'
 		else 'OnTime' END as Lateness,
