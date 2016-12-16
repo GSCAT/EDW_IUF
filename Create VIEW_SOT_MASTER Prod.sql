@@ -3,6 +3,7 @@
 Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 
 (Select
+	a1.NUMBER_SEQ,
 	a1. Dest_PO_ID,
 	a2.ReportingBrand,
 	a1.Category,
