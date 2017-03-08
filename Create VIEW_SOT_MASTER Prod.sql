@@ -1,4 +1,4 @@
---drop view SRAA_SAND.VIEW_SOT_MASTER;
+drop view SRAA_SAND.VIEW_SOT_MASTER;
 
 Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 
@@ -12,6 +12,7 @@ Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 	a1.SHIP_CANCEL_DATE,
 	a1.ORD_QTY  as Units,
 	a1.MetricShipDate,
+	a1.ACTUAL_ORIGIN_CONSOL_LCL_DATE,
 	a1.ACTUAL_STOCKED_LCL_DATE StockedDate,
 	a1.ORIGIN_COUNTRY_CODE CountryOfOrigin,
 	a1.Lateness,
@@ -35,6 +36,8 @@ Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 	a1.PROGRAM_TYPE ProgramType,
 	a1.BUYING_AGENT_GROUP,
 	a1.XFR_PT_COUNTRY_CODE,
+	a1.XFR_PT_PLACE_CODE,
+	a1.XFR_Point_Place,
 	a1.LOC_ABBR_NM,
 	a1.SHP_MODE_CATG_NM,
 	a1.SHP_RSN_TYP_DESC,
@@ -57,6 +60,6 @@ Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 	sum(Total_FCST_ELC) as Sum_Tot_ELC, 
 	Row_NUMBER() Over(order by (sum(Total_FCST_ELC) )desc ) as Vendor_Rank from SRAA_SAND.EDW_IUF_YTD
 	group by MasterVendorID)) a4 
-		ON a4.MasterVendorID=a1.MasterVendorID
+		ON a4.MasterVendorID = a1.MasterVendorID
 		
 		where a2.ReportingBrand is not NULL);
