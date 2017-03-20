@@ -1,5 +1,5 @@
 drop view SRAA_SAND.VIEW_SOT_MASTER_TTP;
-
+-- This is an adhoc 
 Create VIEW SRAA_SAND.VIEW_SOT_MASTER_TTP AS
 
 (Select
