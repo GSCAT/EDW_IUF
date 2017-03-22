@@ -1,3 +1,6 @@
+-- This is the main production table for SOT/OTS 
+-- This is a YTD table. Dates must be changed in the where statement below once per  fiscal year
+
 DROP TABLE SRAA_SAND.EDW_IUF_YTD;
 
 CREATE MULTISET TABLE SRAA_SAND.EDW_IUF_YTD ,NO FALLBACK ,
