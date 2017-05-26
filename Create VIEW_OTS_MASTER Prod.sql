@@ -16,16 +16,16 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 	a1.ACTUAL_STOCKED_LCL_DATE StkdDte,
 	 a1.ORD_QTY  as Units,
 		case
--- Change grace period to 2 days 2017-05-26
--- If date is not NULL and 'Days Late' is 2 then OnTime
--- If date is not NULL and 'Days Late' is 3 then Late
+-- Leave Grace period to 3 days
+-- If date is not NULL and 'Days Late' is 3 then OnTime
+-- If date is not NULL and 'Days Late' is 4 then Late
 -- If date = NULL we can assume goods will land at best following day therefore 
--- Change grace period for when date is Null to 2 - 1 (if  goods haven't landed we know they will at best land tomorrow) 
+-- Change grace period for when date is Null to 3 - 1 (if  goods haven't landed we know they will at best land tomorrow) 
 
-			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and (((a1.Data_Pulled) - a1.PLANNED_STOCKED_DATE)  between 2 and 45)) then 'Late' 
-			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and ((a1.Data_Pulled) - a1.PLANNED_STOCKED_DATE between -45 and 1)) then 'OnTime' 
-			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between -45 and 2  then 'OnTime'
-			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between 3 and 45  then 'Late'
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and (((a1.Data_Pulled) - a1.PLANNED_STOCKED_DATE)  between 3 and 45)) then 'Late' 
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is null and ((a1.Data_Pulled) - a1.PLANNED_STOCKED_DATE between -45 and 2)) then 'OnTime' 
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between -45 and 3  then 'OnTime'
+			WHEN (a1.ACTUAL_STOCKED_LCL_DATE -  a1.PLANNED_STOCKED_DATE) between 4 and 45  then 'Late'
 						WHEN (a1.ACTUAL_STOCKED_LCL_DATE is NULL AND ((a1.Data_Pulled) - a1.PLANNED_STOCKED_DATE > 45)) THEN 'Undetermined'
 			WHEN (a1.ACTUAL_STOCKED_LCL_DATE is NULL AND ((a1.Data_Pulled) - a1.PLANNED_STOCKED_DATE < -(45))) THEN 'Undetermined'
 		else 'OnTime' END as Lateness,
