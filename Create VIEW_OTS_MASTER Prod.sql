@@ -16,8 +16,6 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 	a1.ACTUAL_STOCKED_LCL_DATE StkdDte,
 	 a1.ORD_QTY  as Units,
 		case
-			--WHEN a1.ACTUAL_STOCKED_LCL_DATE is null then 'Unmeasurable'
-
 -- Change grace period to 2 days 2017-05-26
 -- If date is not NULL and 'Days Late' is 2 then OnTime
 -- If date is not NULL and 'Days Late' is 3 then Late
