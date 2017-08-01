@@ -15,6 +15,8 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 	a1.ACTUAL_IN_DC_LCL_DATE AS inDCDTe,
 	a1.ACTUAL_STOCKED_LCL_DATE StkdDte,
 	 a1.ORD_QTY  as Units,
+	  a1.FCST_QTY,		
+	 a1. ACTL_STK_QTY,
 		case
 -- Leave Grace period to 3 days
 -- If date is not NULL and 'Days Late' is 3 then OnTime
@@ -42,14 +44,14 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 			WHEN a1.LOC_ABBR_NM =  'UK DC' THEN 'GUK'
 			ELSE a1.LOC_ABBR_NM END AS DC_NAME,
 	a1.Planned_Stock_Week as Week,
-	a3.MO_NBR  Month_Number,
+	a1.Planned_Stock_Month  Month_Number,
 	a1.SHP_MODE_CATG_NM,
 	a1.DEST_COUNTRY_CODE AS DestCtryCD,
 	a1.ACTUAL_STOCKED_LCL_DATE - a1.PLANNED_STOCKED_DATE as Varstockdate,
 	a1.LOC_ABBR_NM,
 	a1.AGT_DEPT_ABBR_DESC as agt_dep_desc,
 	a1.AGT_DEPT_ID,
-	a3.MO_DESC Fiscal_Month,
+	a1.Planned_Stock_Month_Desc Fiscal_Month,
 	a1.GEO_GRP_ABBR_NM as DCCampus,
 	a1.ORIGIN_COUNTRY_CODE,
 	a1.XFR_Point_Place,
@@ -68,8 +70,8 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 	and a2.Channel_DESC = a1. CHNL_NM
 	
 	
-	left join SRAA_SAND.VRDCL_RLN_DAY_CAL_LKUP a3
-	on a1.PLANNED_STOCKED_DATE = a3.FIS_CAL_DT 
+	--left join VIEWFNDT.VFDTD_FIS_DT_DIM a3
+	--on a1.PLANNED_STOCKED_DATE = a3.FIS_CAL_DT 
 	
 	LEFT JOIN ((Select MasterVendorID as MasterVendorID, 
 	sum(FCST_QTY) as SUM_FCST_QTY, 

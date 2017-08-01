@@ -1,4 +1,4 @@
-drop view SRAA_SAND.VIEW_SOT_MASTER;
+--drop view SRAA_SAND.VIEW_SOT_MASTER;
 
 Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 
@@ -16,13 +16,13 @@ Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 	a1.ACTUAL_STOCKED_LCL_DATE StockedDate,
 	a1.ORIGIN_COUNTRY_CODE CountryOfOrigin,
 	a1.Lateness,
-	a3.MO_NBR ShipCancelMonth,
+	a1.Shp_cxl_Month ShipCancelMonth,
 	cast(a1.Shp_Cxl_WK as INTEGER) ShipCancelWeek,
   	a1.DAYS_LATE,
 	a4.Vendor_Rank,
-	a3.MO_DESC Fiscal_Month,
-	a3.QTR_DESC Quarter,
-	cast(a3.YR_NBR as INTEGER) FISCAL_YEAR,
+	a1.Shp_Cxl_Month_desc Fiscal_Month,
+	a1.FIS_QTR_DESC Quarter,
+	cast(a1.Shp_Cxl_YR as INTEGER) FISCAL_YEAR,
 	a1.GEO_GRP_ABBR_NM DC_GEO_LOC,
 	a1.MasterVendorID,
 	a1.AGT_DEPT_ID,
@@ -52,8 +52,8 @@ Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 	and a2.Channel_DESC = a1. CHNL_NM
 	
 	
-	left join SRAA_SAND.VRDCL_RLN_DAY_CAL_LKUP a3
-	on a1.SHIP_CANCEL_DATE = a3.FIS_CAL_DT 
+	--left join SRAA_SAND.VRDCL_RLN_DAY_CAL_LKUP a3
+	--on a1.SHIP_CANCEL_DATE = a3.FIS_CAL_DT 
 	
 	LEFT JOIN ((Select MasterVendorID as MasterVendorID, 
 	sum(FCST_QTY) as SUM_FCST_QTY, 
