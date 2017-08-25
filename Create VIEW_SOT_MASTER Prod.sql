@@ -42,7 +42,9 @@ Create VIEW SRAA_SAND.VIEW_SOT_MASTER AS
 	a1.LOC_ABBR_NM,
 	a1.SHP_MODE_CATG_NM,
 	a1.SHP_RSN_TYP_DESC,
-	a1.Data_Pulled
+	a1.Data_Pulled,
+	a1.Planned_IN_DC_DATE,
+	a1.Actual_IN_DC_LCL_DATE
 	
 	 
 	 from SRAA_SAND.EDW_IUF_YTD a1
