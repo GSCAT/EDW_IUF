@@ -4,7 +4,7 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 
 (Select
 	a1.NUMBER_SEQ,
-	a1. Dest_PO_ID,
+	a1. Dest_PO_ID, 
 	a2.ReportingBrand,
 	a1.Category,
 	a1.PAR_VENDOR_LEGAL_DESC Parent_Vendor,
@@ -80,4 +80,8 @@ Create VIEW SRAA_SAND.VIEW_OTS_MASTER AS
 	group by MasterVendorID)) a4 
 		ON a4.MasterVendorID=a1.MasterVendorID
 		
-		where a2.ReportingBrand is not NULL);
+		where a2.ReportingBrand is not NULL
+		
+		and (LOC_ABBR_NM not in ('GUK', 'EFC', 'UK DC')  or
+		 (LOC_ABBR_NM  in ('GUK', 'EFC', 'UK DC') and PLANNED_STOCKED_DATE  not between DATE '2018-02-11' and  '2018-03-03'))
+		);
